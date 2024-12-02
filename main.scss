@@ -1,0 +1,220 @@
+/* variables */
+
+:root {
+  /* primary colors */
+  --clr-primary-100: hsl(0, 100%, 67%);
+  --clr-primary-100-bg: hsl(0, 100%, 67%, 0.1);
+  --clr-primary-200: hsl(39, 100%, 56%);
+  --clr-primary-300: hsl(166, 100%, 37%);
+  --clr-primary-400: rgb(17, 37, 212);
+  --clr-primary-500: hsl(252, 100%, 67%);
+
+  /* colors */
+
+  --clr-neutral-100: hsl(0, 0%, 100%);
+  --clr-neutral-200: hsl(221, 100%, 96%);
+  --clr-neutral-300: hsl(241, 100%, 89%);
+  --clr-neutral-300-05: hsla(241, 100%, 89%, 0.5);
+  --clr-neutral-400: hsl(224, 30%, 27%);
+
+  /* gradients */
+  --clr-gradient-100: rgb(120, 87, 255);
+  --clr-gradient-200: rgb(46, 43, 233);
+  --clr-accent-500: hsl(256, 72%, 46%);
+  --clr-accent-500-05: hsla(256, 72%, 46%, 0.5);
+
+  --box-shadow: 20px 20px 40px 0px rgba(17, 37, 212, 0.1);
+
+  /* spacing */
+  --spacer: 1rem;
+
+  /* typography */
+  --fw-500: 500;
+  --fw-700: 700;
+  --fw-800: 800;
+}
+
+/* fonts */
+
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&display=swap");
+
+/* reset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4 {
+  line-height: 1.2;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+body {
+  line-height: 1.6;
+  text-align: center;
+  font-family: "Hanken Grotesk", sans-serif;
+  font-size: 18px;
+}
+
+/* Utility classes */
+/* Default is --spacer, can be overwritten with --flow-space */
+.flow-content > * + * {
+  margin-top: var(--flow-space, var(--spacer));
+}
+
+.flow-content--large {
+  --flow-space: 3rem;
+}
+
+.lg-space {
+  margin-top: calc(var(--spacer) * 2);
+}
+
+.xl-space {
+  margin-top: calc(var(--spacer) * 3);
+}
+
+/* Keeps content from the side */
+.container {
+  padding: 0 var(--spacer);
+  max-width: 70rem;
+  margin: 0 auto;
+}
+
+.split {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-left {
+  text-align: left;
+}
+
+/* general styles */
+
+main {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+
+section {
+  padding: calc(var(--spacer) * 2);
+  border-radius: calc(var(--spacer) * 2);
+  background: var(--clr-neutral-100);
+  box-shadow: var(--box-shadow);
+}
+
+/* results card */
+.result {
+  padding: calc(var(--spacer) * 2);
+  border-radius: calc(var(--spacer) * 2);
+  background: linear-gradient(
+    0deg,
+    rgba(46, 43, 233, 1) 0%,
+    rgba(120, 87, 255, 1) 100%
+  );
+  color: var(--clr-neutral-300);
+  max-width: 20rem;
+  min-height: 30rem;
+  h2 {
+    font-size: 1.5rem;
+    font-weight: var(--fw-700);
+    color: var(--clr-neutral-300);
+  }
+
+  &__circle {
+    border-radius: 50%;
+    background: linear-gradient(
+      0deg,
+      rgba(120, 87, 255, 0.5) 0%,
+      rgba(46, 43, 233, 1) 100%
+    );
+    width: 12rem;
+    height: 12rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__numbers {
+    color: var(--clr-neutral-300-05);
+    font-weight: var(--fw-700);
+  }
+
+  &__number {
+    padding-top: calc(var(--spacer) * 3);
+    line-height: 1.2;
+    font-size: 4rem;
+    font-weight: var(--fw-800);
+    color: var(--clr-neutral-100);
+  }
+  &__heading {
+    font-size: 1.9rem;
+    font-weight: var(--fw-700);
+    color: var(--clr-neutral-100);
+  }
+}
+
+.summary {
+  min-width: 18rem;
+  padding: calc(var(--spacer) * 2);
+  &__row {
+    background: var(--clr-primary-100-bg);
+    padding: calc(var(--spacer) / 2) var(--spacer);
+    border-radius: calc(var(--spacer) / 2);
+  }
+  &__row > * {
+    align-items: center;
+    & svg {
+      margin-right: calc(var(--spacer) / 2);
+    }
+  }
+}
+
+.summary__row {
+  $colors: (
+    reaction: var(--clr-primary-100),
+    memory: var(--clr-primary-200),
+    verbal: var(--clr-primary-300),
+    visual: var(--clr-primary-400),
+  );
+
+  @each $class, $color in $colors {
+    &.#{$class} {
+      .summary__row__heading {
+        color: $color;
+      }
+    }
+  }
+}
